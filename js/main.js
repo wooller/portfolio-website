@@ -8,17 +8,17 @@ var renderer = new THREE.WebGLRenderer({
 });
 renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 renderer.setSize(width, height);
-renderer.setClearColor(0x1EA4E0);
+renderer.setClearColor(0xd8d6d6);
 
 var scene = new THREE.Scene();
 
-var camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 10000);
+var camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000);
 camera.position.set(120, 0, 300);
 
-var light = new THREE.HemisphereLight(0xffffff, 0x47b209, 0.6);
+var light = new THREE.HemisphereLight(0xffffff, 0x1e1e1e, 0.6);
 scene.add(light);
 
-var light = new THREE.DirectionalLight(0x590D82, 0.5);
+var light = new THREE.DirectionalLight(0x1e1e1e, 0.5);
 light.position.set(200, 300, 400); 
 scene.add(light);
 var light2 = light.clone();
@@ -31,18 +31,18 @@ for(var i = 0; i < geometry.vertices.length; i++) {
     vector._o = vector.clone();  
 }
 var material = new THREE.MeshPhongMaterial({
-    emissive: 0xf42570, 
+    emissive: 0x1e1e1e, 
     emissiveIntensity: 0.4,
     shininess: 0
 });
 var shape = new THREE.Mesh(geometry, material);
-shape.position.z = 100;
+shape.position.z = 50;
 scene.add(shape);
 
 var newShape = shape.clone();
 newShape.position.x = 350;
 newShape.position.y = 150;
-newShape.position.z = 50;
+newShape.position.z = -100;
 newShape.scale = 0.5;
 scene.add(newShape);
 
@@ -55,7 +55,7 @@ function updateVertices (a) {
             (vector.y * 0.006) + (a * 0.0003),
             (vector.z * 0.006)
         );
-        var ratio = ((perlin*0.4 * (scroll.y+0.1)) + 0.8);
+        var ratio = ((perlin*0.4 * (mouse.y+0.1)) + 0.8);
         vector.multiplyScalar(ratio);
     }
     geometry.verticesNeedUpdate = true;
@@ -64,6 +64,7 @@ function updateVertices (a) {
 function render(a) {
     requestAnimationFrame(render);
     updateVertices(a);
+    shape.position.x = mouse.x
     renderer.render(scene, camera);
 }
 
@@ -73,28 +74,22 @@ function onResize() {
     width = canvas.offsetWidth;
     height = canvas.offsetHeight;
     camera.aspect = width / height;
-    camera.updateProjectionMatrix();  
+    camera.updateProjectionMatrix();
     renderer.setSize(width, height);
 }
 
-var scroll = new THREE.Vector2(0.8, 0.5);
-function onScroll(e) {
-  console.log(window.scrollY);
-  var scrollY;
-  if (window.scrollY > 1000){
-    scrollY = 1000
-  }else {
-    scrollY = window.scrollY
-  }
-    TweenMax.to(scroll, 0.8, {
-        y: (scrollY / height),
-        x : (scrollY / width),
+var mouse = new THREE.Vector2(0.8, 0.5);
+function onMouseMove(e) {
+    TweenMax.to(mouse, 0.8, {
+        y: (e.clientY / height),
+        x : (e.clientX / width),
         ease: Power1.easeOut
     });
 }
 
+
 requestAnimationFrame(render);
-window.addEventListener("scroll", onScroll);
+window.addEventListener("mousemove", onMouseMove);
 var resizeTm;
 window.addEventListener("resize", function(){
     resizeTm = clearTimeout(resizeTm);
