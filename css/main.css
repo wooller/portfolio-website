@@ -1,0 +1,141 @@
+html{
+  font-size: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a {
+  font-family: Hack, monospace;
+  font-weight: normal;
+  color: #303030;
+}
+
+ a {
+  font-weight: 300;
+}
+
+h1{
+  font-size: 4vw;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 1.5vw;
+}
+
+span, p {
+  font-size: 0.8vw;
+}
+.main{
+  height: 100vh;
+  width: 100vw;
+}
+
+.left_container{
+  width: 45%;
+  height: 100%;
+  background-color: #f5f4f4;
+  float: left;
+}
+
+.inner_container {
+  padding: 40px 60px;
+  position: relative;
+  height: calc(100% - 80px);
+}
+
+.slogan{
+  height: 10%;
+}
+
+.slogan .name{
+  display: block;
+  margin: 0;
+  margin-bottom: 5px;
+  
+}
+
+.slogan .title{
+  display: block;
+}
+
+.relative_container {
+  position: relative;
+  height: 80%;
+}
+
+.skills_container{
+  width: 100%;
+  text-align: justify;
+  margin-top: 50px;
+}
+
+.skills_container:after {
+  content: '';
+  width: 100%; /* Ensures there are at least 2 lines of text, so justification works */
+  display: inline-block;
+}
+
+.skill{
+  display: inline-block;
+}
+
+.relative_inner_container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.relative_inner_container p,h1{
+  max-width: 700px;
+}
+
+.relative_inner_container h1{
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.relative_inner_container hr {
+  width: 100%
+}
+
+.right_container {
+  float: left;
+  width: 55%;
+  height: 100%;
+}
+
+.right_inner_container{
+  height: 100%;
+  width: 100%;
+}
+
+.right_container .background_image {
+  width: 100%;
+  height: 100%;
+  background-image: url(https://picsum.photos/1500?gravity=center);
+  background-size: cover;
+  background-position: center center;
+}
+
+.bottom_container {
+  height: 10%;
+  position: relative;
+}
+
+.menu{
+  bottom: 0;
+  position: absolute;
+}
+
+.menu .nav_item{
+  text-transform: uppercase;
+  font-size: 1.25vw;
+  margin-right: 20px;
+  padding: 2.5px 5px;
+  text-decoration: none;
+}
+
+.menu .nav_item.active{
+  background-color: #303030;
+  color: #ffffff;
+}
